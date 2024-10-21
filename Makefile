@@ -1,25 +1,27 @@
 MAKEFILE_DIR := $(abspath $(shell dirname $(lastword $(MAKEFILE_LIST))))
 NVIDIA_CONFTEST ?= $(MAKEFILE_DIR)/out/nvidia-conftest
 
-all: nvidia-nvgpu-modules nvidia-oot-modules alvium-driver-modules 
-install: nvidia-modules-install alvium-driver-modules-install
+all: nvidia-nvgpu-modules nvidia-oot-modules vc-mipi-driver-modules
+install: nvidia-modules-install vc-mipi-driver-modules-install
 
-alvium-driver-modules: nvidia-oot-modules
+
+vc-mipi-driver-modules: nvidia-oot-modules
 	$(MAKE) \
 		KBUILD_EXTRA_SYMBOLS=$(MAKEFILE_DIR)/nvidia-oot/Module.symvers \
 		CONFIG_TEGRA_OOT_MODULE=y \
 		srctree.nvidia-oot=$(MAKEFILE_DIR)/nvidia-oot \
-		srctree.alvium-csi2-driver=$(MAKEFILE_DIR)/alvium-csi2-driver \
-		M=$(MAKEFILE_DIR)/alvium-csi2-driver \
+		srctree.vc-mipi-driver=$(MAKEFILE_DIR)/vc-mipi-driver \
+		srctree.nvconftest=$(NVIDIA_CONFTEST) \
+		M=$(MAKEFILE_DIR)/vc-mipi-driver \
 		-C $(KERNEL_SRC) 
 
-alvium-driver-modules-install: alvium-driver-modules
+vc-mipi-driver-modules-install: vc-mipi-driver-modules
 	$(MAKE) \
 		KBUILD_EXTRA_SYMBOLS=$(MAKEFILE_DIR)/nvidia-oot/Module.symvers \
 		CONFIG_TEGRA_OOT_MODULE=y \
 		srctree.nvidia-oot=$(MAKEFILE_DIR)/nvidia-oot \
 		KERNEL_SRC=$(KERNEL_SRC) \
-		-C $(MAKEFILE_DIR)/alvium-csi2-driver install
+		-C $(MAKEFILE_DIR)/vc-mipi-driver install
 
 
 nvidia-oot-conftest:

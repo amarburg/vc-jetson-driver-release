@@ -1,6 +1,3 @@
-[submodule "alvium-csi2-driver"]
-	url = https://github.com/alliedvision/alvium-csi2-driver.git
-	path = alvium-csi2-driver
 [submodule "nvidia-oot"]
 	url = https://github.com/alliedvision/nvidia-oot.git
 	path = nvidia-oot

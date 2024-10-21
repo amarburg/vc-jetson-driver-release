@@ -1,3 +1,6 @@
+n.b. This repository is based on the [Allied Vision Alvium CSI Driver for Jetpack 6](https://github.com/alliedvision/alvium-jetson-driver-release) and owes
+quite a bit to their work.  
+
 # Allied Vision Alvium CSI driver for Jetpack 6 
 
 ## Compatibility
