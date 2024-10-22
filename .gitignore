@@ -1,3 +1,6 @@
 aarch64*/
 Linux_for_Tegra/
 out/
+
+install.tar.bz2
+install/

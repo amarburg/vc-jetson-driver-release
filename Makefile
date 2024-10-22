@@ -4,6 +4,10 @@ NVIDIA_CONFTEST ?= $(MAKEFILE_DIR)/out/nvidia-conftest
 all: nvidia-nvgpu-modules nvidia-oot-modules vc-mipi-driver-modules
 install: nvidia-modules-install vc-mipi-driver-modules-install
 
+# Build a tarball for installation on Nano
+package:
+	sudo chown -R root:root $(INSTALL_MOD_PATH)/
+	tar -C install -cjvf install.tar.bz2 lib/ boot/
 
 vc-mipi-driver-modules: nvidia-oot-modules
 	$(MAKE) \
