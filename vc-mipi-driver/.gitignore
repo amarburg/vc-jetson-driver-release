@@ -6,4 +6,5 @@
 Module.symvers
 modules.order
 *.dtbo*
+**/.*.d
 

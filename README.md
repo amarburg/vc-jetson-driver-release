@@ -1,40 +1,11 @@
-n.b. This repository is based on the [Allied Vision Alvium CSI Driver for Jetpack 6](https://github.com/alliedvision/alvium-jetson-driver-release) and owes
-quite a bit to their work.  
+n.b. This repository is based on the [Allied Vision Alvium CSI Driver for Jetpack 6](https://github.com/alliedvision/alvium-jetson-driver-release).
 
-# Allied Vision Alvium CSI driver for Jetpack 6 
-
-## Compatibility
-### SoMs + Carrier Boards 
-- Jetson AGX Orin DevKit
-- Jetson Orin Nano DevKit
-- Jetson Orin NX + Jetson Orin Nano DevKit carrier
-### Cameras
-- All Alvium C cameras with Firmware 13 or newer
-
-## Installation 
-1. Download the two debian packages from the releases section to our target board
-2. Install the packages by running:
-    ```shell
-    sudo apt install ./alvium-csi2-driver-<version>.deb ./avt-nvidia-l4t-kernel-oot-modules-<version>.deb
-    ```
-3. Configure the device tree
-    1. Start the jetson-io tool
-        ```shell
-        sudo /opt/nvidia/jetson-io/jetson-io.py
-        ```
-    2. Select the CSI connector configuration
-        - For AGX Orin: "Jetson AGX CSI Connector"
-        - For Orin Nano / NX: "Jetson 24pin CSI Connector"
-    3. Select "Configure for compatible hardware"
-    4. Select the "Allied Vision Alvium Dual" configuration
-    5. Select "Save pin changes" 
-    6. Select "Save and reboot to reconfigure pins"
-4. After the board has reboot the camera can be access with V4L2 and Vimba X
+# Vision Components MIPI driver for Jetpack 6 
 
 ## Building
 1. Clone this repository including all submodules
-2. Download the Jetson Linux driver package and cross compiler from: [Jetson Linux Downloads](https://developer.nvidia.com/embedded/jetson-linux)
-3. Extract the driver package: 
+2. Download the Jetson Linux driver package (BSP) and cross compiler from: [Jetson Linux Downloads](https://developer.nvidia.com/embedded/jetson-linux)
+3. Extract the driver package **in this directory**: 
     ```shell
         tar -xf jetson_linux_r36*.bz2
     ```
@@ -43,15 +14,24 @@ quite a bit to their work.
         cd Linux_for_Tegra/kernel/
         tar -xf kernel_headers.tbz2
     ```
-5. Extract the cross compiler
-6. Build the modules:
+5. Extract the cross compiler **in this directory**:
+   ```shell
+        tar -xf aarch64--glibc--stable-2022.08-1.tar.bz2
+   ```
+6. Set the following environment variables ( `source setup.sh` is a convenience alias):
     ```shell
         export ARCH=arm64
         export CROSS_COMPILE=<path to cross compiler>/bin/aarch64-buildroot-linux-gnu-
         export KERNEL_SRC=Linux_for_Tegra/kernel/linux-headers-*-linux_x86_64/3rdparty/canonical/linux-jammy/kernel-source/
+    ```
+
+7. Build the kernel modules:
+    ```shell
         make all 
     ```
-7. Install the driver modules
+7. **I'm not sure what happens next...**
+
+8. Install the driver modules
     ```shell
         export INSTALL_MOD_PATH=<path to install directory>
         make install
