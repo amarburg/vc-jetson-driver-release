@@ -2,6 +2,15 @@ n.b. This repository is based on the [Allied Vision Alvium CSI Driver for Jetpac
 
 # Vision Components MIPI driver for Jetpack 6 
 
+## Submodule status:
+
+Following the pattern from the [AVT driver package](https://github.com/alliedvision/alvium-jetson-driver-release), the four Nvidia OOT kernel packages are included as submodules:
+
+ * `nvidia-hwpm`, `nvidia-nvethernetrm`, and `nvidia-nvgpu` use the upstream repos from _Allied VIsion_.   I don't know how/if these differ from Nvidia's original source.
+ * `nvidia-oot` points to [my nvidia-oot repo](https://github.com/amarburg/nvidia-oot) which contains the Nvidia OOT module source with the [VC patches](https://github.com/VC-MIPI-modules/vc_mipi_nvidia/tree/master/patch/kernel_Xavier_36.2.0%2B) applied.  
+
+The `vc-mipi-driver` contains the VC module sources [from their repo](https://github.com/VC-MIPI-modules/vc_mipi_nvidia/tree/master/src), rearranged for this build system.
+
 ## Building
 1. Clone this repository including all submodules
 2. Download the Jetson Linux driver package (BSP) and cross compiler from: [Jetson Linux Downloads](https://developer.nvidia.com/embedded/jetson-linux)
