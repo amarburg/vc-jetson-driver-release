@@ -1,5 +1,5 @@
 [submodule "nvidia-oot"]
-	url = https://github.com/alliedvision/nvidia-oot.git
+	url = https://github.com/amarburg/nvidia-oot
 	path = nvidia-oot
 [submodule "nvidia-hwpm"]
 	url = https://github.com/alliedvision/nvidia-hwpm.git
